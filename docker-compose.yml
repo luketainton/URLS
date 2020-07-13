@@ -1,0 +1,11 @@
+---
+version: "3"
+services:
+  app:
+    build: .
+    image: luketainton/urls:latest
+    restart: unless-stopped
+    volumes:
+      - /path/to/urls.php:/var/www/urls.php:ro
+    ports:
+      - 8000:80
