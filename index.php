@@ -8,6 +8,25 @@
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            * {
+                font-family: Arial;
+            }
+            table {
+                border-collapse: collapse;
+                width: 60%;
+            }
+
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+
+            tr:nth-child(even) {
+                background-color: #dddddd;
+            }
+        </style>
 	</head>
 	<body>
         <center>
@@ -23,7 +42,17 @@
                         echo("<h1>Not Found</h1><p>'" . $requested . "' is not a valid short URL. Please try again.</p>");
                     }
                 } else {
-                    echo("<h1>Server Error</h1><p>Please specify a short URL.</p>");
+                    if (empty($urls)) {
+                        // URL list is empty
+                        echo("<h1>Server Error</h1><p>No short URLs have been defined.</p>");
+                    } else {
+                        echo("<h1>Available short URLs</h1>");
+                        echo("<table><tr><th>Short URL</th><th>Full URL</th></tr>");
+                        foreach ($urls as $key => $value) {
+                            echo("<tr><td>".$key."</td><td><a href='".$value."'>".$value."</a></td></tr>");
+                        }
+                        echo("</table>");
+                    }
                 }
             ?>
 	    </center>
